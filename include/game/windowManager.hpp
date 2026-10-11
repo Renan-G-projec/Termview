@@ -16,15 +16,20 @@ public:
     ~WindowManager();
 
     int getWindowCount() const { return mWindows.size(); }
-    void setCurrentWindow(int windowIndex) { mCurrentWindowIndex = windowIndex; }
-    void updateCurrentWindow();
+    void update();
+    void setCurrentWindow(int windowIndex);
     void closeCurrentWindow();
+    void closeWindow(int windowIndex);
+
+    void swapAllWindows();
     bool createWindow(int width, int height, const char *title);
     void closeAllWindows();
 
+    bool isRunning() const { return mIsRunning; }
 private:
     std::vector<GLFWwindow *> mWindows;
     int mCurrentWindowIndex = 0;
+    bool mIsRunning = true;
 };
 
 #endif

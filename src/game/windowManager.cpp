@@ -51,10 +51,48 @@ bool WindowManager::createWindow(int width, int height, const char *title)
     return true;
 }
 
-void WindowManager::closeAllWindows() {
+void WindowManager::closeAllWindows() 
+{
     for (auto window : mWindows)
     {
         glfwDestroyWindow(window);
     }
     mWindows.clear();
+    mIsRunning = false;
+}
+
+void WindowManager::update() 
+{
+    for (auto window : mWindows)
+    {
+        if (glfwWindowShouldClose(window)) closeAllWindows();
+    }
+    glfwPollEvents();
+}
+
+void WindowManager::setCurrentWindow(int windowIndex)
+{
+    if (windowIndex < 0 || windowIndex >= mWindows.size()) return;
+    mCurrentWindowIndex = windowIndex;
+    glfwMakeContextCurrent(mWindows[mCurrentWindowIndex]);
+}
+
+void WindowManager::closeCurrentWindow() 
+{
+    closeWindow(mCurrentWindowIndex);
+}
+
+void WindowManager::closeWindow(int windowIndex)
+{
+    if (windowIndex < 0 || windowIndex >= mWindows.size()) return;
+    glfwDestroyWindow(mWindows[windowIndex]);
+    mWindows.erase(mWindows.begin() + windowIndex);
+}
+
+void WindowManager::swapAllWindows() 
+{
+    for (auto window : mWindows)
+    {
+        glfwSwapBuffers(window);
+    }
 }
