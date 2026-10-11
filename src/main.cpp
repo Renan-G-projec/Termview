@@ -1,18 +1,8 @@
 // Ad Maiorem Dei Gloriam!
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "game/windowManager.hpp"
 
 int main() {
-    glfwInit();
-    GLFWwindow *window = glfwCreateWindow(720, 720, "Initial setup window...", NULL, NULL);
-    glfwMakeContextCurrent(window);
-    glewInit();
-
-    while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
-        glClear(GL_COLOR_BUFFER_BIT);
-        glfwSwapBuffers(window);
-    }
+    WindowManager wm{720, 720, "Temp title"};
     return 0;
 }

@@ -9,6 +9,7 @@ include(FetchContent)
 set(GLFW_BUILD_EXAMPLES OFF)
 set(GLFW_BUILD_TESTS OFF)
 set(GLFW_BUILD_DOCS OFF)
+set(GLFW_BUILD_WAYLAND OFF)
 FetchContent_Declare(
     glfw
     GIT_REPOSITORY https://github.com/glfw/glfw.git
@@ -34,6 +35,7 @@ find_package(GLEW REQUIRED)
 
 target_sources(Platview PRIVATE
     src/main.cpp
+    src/game/windowManager.cpp
 )
 
 target_include_directories(Platview PRIVATE
