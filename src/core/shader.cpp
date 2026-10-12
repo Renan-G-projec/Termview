@@ -30,7 +30,7 @@ void Shader::attachFile(const std::string& file, GLenum type)
         return;
     }
 
-    std::getline(fileStream, src);
+    std::getline(fileStream, src, '\0');
     const char *srcString = src.c_str();
 
     glShaderSource(shader, 1, &srcString, NULL);
@@ -64,4 +64,12 @@ void Shader::link()
         std::cerr << "Error while linking shader\n" << log << std::endl;
         return;
     }
+}
+
+void Shader::activate() const {
+    glUseProgram(mId);
+}
+
+void Shader::deactivate() {
+    glUseProgram(0);
 }

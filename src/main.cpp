@@ -8,8 +8,7 @@ int main() {
     
     WindowManager wm{720, 720, "Temp title"};
     wm.createWindow(720, 389, "WIndow 2");
-    Shader shader;
-    shader.attachFile("kasdfj", GL_FRAGMENT_SHADER);
+    Shader shader{"assets/shaders/basic.vert", "assets/shaders/basic.frag"};
     while (wm.isRunning()) {
         wm.update();
         wm.setCurrentWindow(0);

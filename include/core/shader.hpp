@@ -15,7 +15,7 @@ public:
     Shader(const std::string& vertexFile, const std::string& fragmentFile);
     ~Shader();
 
-    void activate();
+    void activate() const;
     static void deactivate();
 
     void attachFile(const std::string& file, GLenum type);
