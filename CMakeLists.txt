@@ -38,6 +38,7 @@ target_sources(Platview PRIVATE
     src/game/windowManager.cpp
     src/core/vao.cpp
     src/core/vbo.cpp
+    src/core/ebo.cpp
     src/core/camera.cpp
     src/core/shader.cpp
 )

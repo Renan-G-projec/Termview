@@ -4,6 +4,7 @@
 #include "core/shader.hpp"
 #include "core/vao.hpp"
 #include "core/vbo.hpp"
+#include "core/ebo.hpp"
 
 int main() {
 
@@ -15,8 +16,10 @@ int main() {
     VAO vao;
     vao.bind();
     VBO vbo;
-    vbo.sendData(std::vector{1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f});
-    
+    vbo.sendData({1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f});
+    EBO ebo;
+    ebo.sendData({0, 1, 2, 1, 2, 3});
+
     vao.setVertexAttribute(0, 3, 3 * sizeof(GLfloat), (void*)0);
     shader.activate();
 
@@ -29,7 +32,7 @@ int main() {
         wm.setCurrentWindow(1);
         glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         wm.swapAllWindows();
     }
