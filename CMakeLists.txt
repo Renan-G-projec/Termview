@@ -37,6 +37,7 @@ target_sources(Platview PRIVATE
     src/main.cpp
     src/game/windowManager.cpp
     src/core/camera.cpp
+    src/core/shader.cpp
 )
 
 target_include_directories(Platview PRIVATE

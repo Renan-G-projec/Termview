@@ -1,10 +1,15 @@
 // Ad Maiorem Dei Gloriam!
 
 #include "game/windowManager.hpp"
+#include "core/shader.hpp"
 
 int main() {
+
+    
     WindowManager wm{720, 720, "Temp title"};
     wm.createWindow(720, 389, "WIndow 2");
+    Shader shader;
+    shader.attachFile("kasdfj", GL_FRAGMENT_SHADER);
     while (wm.isRunning()) {
         wm.update();
         wm.setCurrentWindow(0);
