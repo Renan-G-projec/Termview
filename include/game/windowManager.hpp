@@ -26,6 +26,7 @@ public:
     void closeAllWindows();
 
     bool isRunning() const { return mIsRunning; }
+    bool isKeyPressed(int key);
 private:
     std::vector<GLFWwindow *> mWindows;
     int mCurrentWindowIndex = 0;

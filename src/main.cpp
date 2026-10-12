@@ -1,6 +1,7 @@
 // Ad Maiorem Dei Gloriam!
 
 #include "game/windowManager.hpp"
+#include "core/renderer.hpp"
 #include "core/camera.hpp"
 #include "core/shader.hpp"
 #include "core/mesh.hpp"
@@ -9,12 +10,21 @@
 #include "core/ebo.hpp"
 #include "core/log.hpp"
 
+// Debug purpuses only XD
+static void updateCameraInput(Camera& camera, WindowManager& wm)
+{
+    if (wm.isKeyPressed(GLFW_KEY_S)) camera.position.z += 0.5f;
+    if (wm.isKeyPressed(GLFW_KEY_W)) camera.position.z -= 0.5f;
+    if (wm.isKeyPressed(GLFW_KEY_D)) camera.position.x += 0.5f;
+    if (wm.isKeyPressed(GLFW_KEY_A)) camera.position.x -= 0.5f;
+};
+
 int main() 
 {
-    Camera cam{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 1.0f}, 60.0f, 100.0f, 0.1f, 1.0f};
+    Camera cam{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, -1.0f}, 60.0f, 100.0f, 0.1f, 1.0f};
+    Renderer renderer(cam);
     
     WindowManager wm{720, 720, "Temp title"};
-    wm.createWindow(720, 389, "WIndow 2");
     Shader shader{"assets/shaders/basic.vert", "assets/shaders/basic.frag"};
 
     const std::vector<Vertex> pyramidVertices = {
@@ -33,20 +43,15 @@ int main()
     shader.activate();
     Mesh pyramid(pyramidVertices, pyramidIndices);
 
+    TransformComponent pyramidTransform{};
 
     while (wm.isRunning()) { 
-        cam.position.z -= 0.1f;       
         wm.update();
-        wm.setCurrentWindow(0);
-        glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        updateCameraInput(cam, wm);
         
-        wm.setCurrentWindow(1);
-        glm::mat4 u_MVP = cam.getMatrix();
-        shader.setUniformMatrix(u_MVP);
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        pyramid.render();
+        renderer.clear();
+        renderer.draw({&shader, &pyramid, &pyramidTransform});
+        renderer.drawAll();
 
         wm.swapAllWindows();
     }

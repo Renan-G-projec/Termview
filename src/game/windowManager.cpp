@@ -96,3 +96,8 @@ void WindowManager::swapAllWindows()
         glfwSwapBuffers(window);
     }
 }
+
+bool WindowManager::isKeyPressed(int key)
+{
+    return glfwGetKey(mWindows[mCurrentWindowIndex], key);
+}
