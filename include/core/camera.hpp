@@ -3,19 +3,18 @@
 #define CAMERA_HPP
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-class Camera
+struct Camera
 {
-public:
-    Camera(glm::vec3 position, glm::vec3 orientation, float fov = 60.0f, float far, float near, float viewRatio)
-        : mPosition{position}, mOrientation{orientation}, mFov{glm::radians(fov)}, mFar{far}, mNear{near}, mViewRatio{viewRatio} {};
-    
-    glm::mat4 getMatrix();
+    Camera(glm::vec3 position, glm::vec3 orientation, float fov = 60.0f, float far = 100.0f, float near = 0.01f, float viewRatio = 1280.0f / 720.0f)
+        : position{position}, orientation{orientation}, fov{glm::radians(fov)}, far{far}, near{near}, viewRatio{viewRatio} {};
 
-private:
-    glm::vec3 mPosition, mOrientation;
-    float mFov, mFar = 100.0f, mNear = 0.1f;
-    float mViewRatio;
+    glm::vec3 position, orientation;
+    float fov, far, near;
+    float viewRatio;
+
+    glm::mat4 getMatrix();
 };
 
 #endif
