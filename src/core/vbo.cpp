@@ -26,3 +26,9 @@ void VBO::sendData(const std::vector<GLfloat>& data, GLenum usage)
     bind();
     glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(GLfloat), data.data(), usage);
 }
+
+void VBO::sendData(const std::vector<Vertex>& data, GLenum usage)
+{
+    bind();
+    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(Vertex), data.data(), usage);
+}

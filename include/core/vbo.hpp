@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <GL/glew.h>
+#include "core/vertex.hpp"
 
 class VBO 
 {
@@ -12,6 +13,7 @@ public:
     ~VBO();
 
     void sendData(const std::vector<GLfloat>& verticesData, GLenum usage = GL_STATIC_DRAW);
+    void sendData(const std::vector<Vertex>& verticesData, GLenum usage = GL_STATIC_DRAW);
 
     void bind() const;
     static void unbind();

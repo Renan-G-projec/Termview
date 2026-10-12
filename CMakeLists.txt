@@ -36,6 +36,7 @@ find_package(GLEW REQUIRED)
 target_sources(Platview PRIVATE
     src/main.cpp
     src/game/windowManager.cpp
+    src/core/mesh.cpp
     src/core/vao.cpp
     src/core/vbo.cpp
     src/core/ebo.cpp

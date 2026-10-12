@@ -6,6 +6,8 @@
 #include <string>
 #include <GL/glew.h>
 
+#include "core/transform.hpp"
+
 #include "core/vertex.hpp"
 #include "core/vbo.hpp"
 #include "core/ebo.hpp"
@@ -15,7 +17,7 @@
 class Mesh
 {
 public:
-    Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices); // For now its not needed to store the vertices on ram as these will not change so it should be only on vram
+    Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices);
     Mesh(const std::string& file);
 
     void render();
@@ -24,6 +26,9 @@ private:
     VBO vbo;
     EBO ebo;
     VAO vao;
+
+    std::vector<Vertex> mVertices;
+    std::vector<GLuint> mIndices;
 };
 
 #endif
