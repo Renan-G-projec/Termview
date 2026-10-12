@@ -11,9 +11,9 @@ public:
     VBO();
     ~VBO();
 
-    void sendData(const std::vector<GLfloat>& verticesData);
+    void sendData(const std::vector<GLfloat>& verticesData, GLenum usage = GL_STATIC_DRAW);
 
-    void bind();
+    void bind() const;
     static void unbind();
 
 private:
