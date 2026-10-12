@@ -21,6 +21,8 @@ public:
     Mesh(const std::string& file);
 
     void render();
+    void lazyRender();
+    void lazyBind(); 
 
 private:
     VBO vbo;

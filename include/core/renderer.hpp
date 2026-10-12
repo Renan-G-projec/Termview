@@ -2,7 +2,10 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
-#include <queue>
+#include <vector>
+#include <algorithm>
+
+#include <GL/glew.h>
 
 #include "core/transform.hpp"
 #include "core/shader.hpp"
@@ -24,13 +27,15 @@ public:
 
     void clear() const;
     void draw(const DrawCommand command);
-    void drawAll() const;
+    void drawAll();
 
     void setCurrentCamera(const Camera& camera);
 
 private:
-    std::queue<DrawCommand> mDrawCommands;
+    std::vector<DrawCommand> mDrawCommands;
     Camera& mCurrentCamera;
+
+    void sortDrawCommands();
 };
 
 #endif

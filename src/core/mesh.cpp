@@ -31,3 +31,13 @@ void Mesh::render()
     vao.bind();
     glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, (void*)0);
 }
+
+void Mesh::lazyRender() 
+{
+    glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, (void*)0);
+}
+
+void Mesh::lazyBind()
+{
+    vao.bind();
+}
