@@ -73,3 +73,8 @@ void Shader::activate() const {
 void Shader::deactivate() {
     glUseProgram(0);
 }
+
+void Shader::setUniformMatrix(const glm::mat4& matrix, const char* uniform) {
+    const GLuint location = glGetUniformLocation(mId, uniform);
+    glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+}

@@ -6,6 +6,9 @@
 #include <string>
 #include <fstream>
 
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/mat4x4.hpp>
+
 #include <GL/glew.h>
 
 class Shader 
@@ -20,6 +23,8 @@ public:
 
     void attachFile(const std::string& file, GLenum type);
     void link();
+
+    void setUniformMatrix(const glm::mat4& matrix, const char *uniform = "u_MVP");
 
 private:
     GLuint mId;
