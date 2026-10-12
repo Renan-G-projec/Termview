@@ -11,7 +11,7 @@
 
 int main() 
 {
-    Camera cam{{0.0f, 0.0f, 0.0f}, {0.0f, -1.0f, 1.0f}, 60.0f, 100.0f, 0.1f, 1.0f};
+    Camera cam{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 1.0f}, 60.0f, 100.0f, 0.1f, 1.0f};
     
     WindowManager wm{720, 720, "Temp title"};
     wm.createWindow(720, 389, "WIndow 2");
@@ -30,12 +30,12 @@ int main()
         0, 1, 3
     };
 
-
     shader.activate();
     Mesh pyramid(pyramidVertices, pyramidIndices);
 
 
-    while (wm.isRunning()) {        
+    while (wm.isRunning()) { 
+        cam.position.z -= 0.1f;       
         wm.update();
         wm.setCurrentWindow(0);
         glClearColor(1.0f, 1.0f, 0.0f, 1.0f);

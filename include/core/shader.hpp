@@ -6,6 +6,8 @@
 #include <string>
 #include <fstream>
 
+#include <unordered_map>
+
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/mat4x4.hpp>
 
@@ -25,9 +27,12 @@ public:
     void link();
 
     void setUniformMatrix(const glm::mat4& matrix, const char *uniform = "u_MVP");
+    GLuint getUniformLocation(const char *uniform);
 
 private:
     GLuint mId;
+    std::unordered_map<const char *, GLuint> mUniformsLocation;
+
 };
 
 #endif

@@ -66,7 +66,8 @@ void Shader::link()
     }
 }
 
-void Shader::activate() const {
+void Shader::activate() const 
+{
     glUseProgram(mId);
 }
 
@@ -74,7 +75,17 @@ void Shader::deactivate() {
     glUseProgram(0);
 }
 
-void Shader::setUniformMatrix(const glm::mat4& matrix, const char* uniform) {
-    const GLuint location = glGetUniformLocation(mId, uniform);
+void Shader::setUniformMatrix(const glm::mat4& matrix, const char* uniform) 
+{
+    const GLuint location = getUniformLocation(uniform);
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+GLuint Shader::getUniformLocation(const char *uniform) 
+{
+    if (mUniformsLocation.find(uniform) == mUniformsLocation.end()) 
+    {
+        mUniformsLocation.insert({uniform, glGetUniformLocation(mId, uniform)});
+    }
+    return mUniformsLocation.at(uniform);
 }
