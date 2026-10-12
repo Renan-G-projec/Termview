@@ -21,10 +21,15 @@ static void updateCameraInput(Camera& camera, WindowManager& wm)
 
 int main() 
 {
-    Camera cam{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, -1.0f}, 60.0f, 100.0f, 0.1f, 1.0f};
+    Camera cam{{0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, -1.0f}, 60.0f, 100.0f, 0.1f, 1.0f};
+    Camera cam2{{0.0f, 0.0f, -1.0f}, {0.0f, 0.0f, 1.0f}, 60.0f, 100.0f, 0.1f, 1.0f};
     Renderer renderer(cam);
+    Renderer renderer2(cam2);
     
     WindowManager wm{720, 720, "Temp title"};
+    wm.createWindow(720, 720, "Temp title");
+    wm.setCurrentWindow(0);
+
     Shader shader{"assets/shaders/basic.vert", "assets/shaders/basic.frag"};
 
     const std::vector<Vertex> pyramidVertices = {
@@ -41,17 +46,31 @@ int main()
     };
 
     shader.activate();
-    Mesh pyramid(pyramidVertices, pyramidIndices);
+    Mesh pyramid1(pyramidVertices, pyramidIndices);
+
+    wm.setCurrentWindow(1);
+    Mesh pyramid2(pyramidVertices, pyramidIndices);
+    Shader shader2{"assets/shaders/basic.vert", "assets/shaders/basic.frag"};
 
     TransformComponent pyramidTransform{};
 
     while (wm.isRunning()) { 
         wm.update();
+        wm.setCurrentWindow(0);
         updateCameraInput(cam, wm);
         
         renderer.clear();
-        renderer.draw({&shader, &pyramid, &pyramidTransform});
+        renderer.draw({&shader, &pyramid1, &pyramidTransform});
         renderer.drawAll();
+
+        wm.setCurrentWindow(1);
+        updateCameraInput(cam2, wm);
+    
+        renderer2.clear();
+        renderer2.draw({&shader2, &pyramid2, &pyramidTransform});
+        renderer2.drawAll();
+
+        pyramidTransform.position.z -= 0.001f;
 
         wm.swapAllWindows();
     }

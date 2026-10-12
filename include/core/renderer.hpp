@@ -29,7 +29,7 @@ public:
     void draw(const DrawCommand command);
     void drawAll();
 
-    void setCurrentCamera(const Camera& camera);
+    void setCurrentCamera(Camera& camera) { mCurrentCamera = camera; }
 
 private:
     std::vector<DrawCommand> mDrawCommands;
