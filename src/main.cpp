@@ -6,6 +6,7 @@
 #include "core/vao.hpp"
 #include "core/vbo.hpp"
 #include "core/ebo.hpp"
+#include "core/log.hpp"
 
 int main() 
 {

@@ -19,6 +19,7 @@ public:
     Mesh(const std::string& file);
 
     void render();
+
 private:
     VBO vbo;
     EBO ebo;
